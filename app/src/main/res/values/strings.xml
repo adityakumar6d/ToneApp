@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Some Task</string>
+    <string name="tone_title">Tone Title</string>
+    <string name="audio_list">Audio List</string>
+</resources>
