@@ -11,8 +11,8 @@ import com.aditya.sometask.databinding.ActivityToneListBinding;
 import com.aditya.sometask.viewmodels.ToneListViewModel;
 
 public class ToneListActivity extends AppCompatActivity {
-    ToneListViewModel viewModel;
-    ActivityToneListBinding binding;
+    private ToneListViewModel viewModel;
+    private ActivityToneListBinding binding;
     ToneListRecyclerAdapter adapter;
 
     @Override
@@ -20,14 +20,15 @@ public class ToneListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_tone_list);
         viewModel = new ViewModelProvider(this).get(ToneListViewModel.class);
+        viewModel.populateList();
         adapter = new ToneListRecyclerAdapter(viewModel.toneListData);
-        viewModel.addData();
-        recyclerViewFunc();
+        recyclerFunc();
     }
 
-    private void recyclerViewFunc() {
+    private void recyclerFunc() {
         binding.recyclerView.setHasFixedSize(true);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerView.setAdapter(adapter);
     }
+
 }

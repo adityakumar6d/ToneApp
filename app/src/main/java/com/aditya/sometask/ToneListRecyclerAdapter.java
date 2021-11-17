@@ -2,6 +2,7 @@ package com.aditya.sometask;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.aditya.sometask.databinding.ListItemBinding;
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -46,26 +48,30 @@ public class ToneListRecyclerAdapter extends RecyclerView.Adapter<ToneListRecycl
             if (!listdata.get(position).getIsliked()) {
                 listdata.get(position).setIsliked(true);
                 holder.binding.likeIcon.setImageResource(R.drawable.full_heart);
-                Toast.makeText(holder.binding.likeIcon.getContext(), "Liked", Toast.LENGTH_SHORT).show();
             } else {
                 listdata.get(position).setIsliked(false);
                 holder.binding.likeIcon.setImageResource(R.drawable.empty_heart);
-                Toast.makeText(holder.binding.likeIcon.getContext(), "Unliked", Toast.LENGTH_SHORT).show();
             }
 
         });
 
-        holder.binding.playIcon.setOnClickListener(v -> {
-            Toast.makeText(holder.binding.playIcon.getContext(), "Played", Toast.LENGTH_SHORT).show();
-        });
+        holder.binding.playIcon.setOnClickListener(v -> Toast.makeText(holder.binding.playIcon.getContext(), "Played", Toast.LENGTH_SHORT).show());
 
         holder.binding.itemParent.setOnClickListener(v -> {
             Intent i = new Intent(holder.binding.itemParent.getContext(), PlayerActivity.class);
-//            i.putExtra(listdata.get(position).)
+
+            Bundle bundle = new Bundle();
+            bundle.putString("TONE_TITLE", listdata.get(position).getToneTitle());
+            bundle.putString("TONE_DURATION", listdata.get(position).getToneDuration());
+            bundle.putString("TONE_SIZE", listdata.get(position).getToneSize());
+            bundle.putString("TONE_IMAGE_URL", listdata.get(position).getImageUrl());
+            bundle.putBoolean("IS_LIKED", listdata.get(position).getIsliked());
+            i.putExtras(bundle);
+
             holder.binding.itemParent.getContext().startActivity(i);
         });
 
-//        Glide.with(holder.binding.imageView2).load("https://picsum.photos/100").into(holder.binding.imageView2);
+        Glide.with(holder.binding.imageView2).load(listdata.get(position).getImageUrl()).into(holder.binding.imageView2);
 
     }
 
@@ -74,6 +80,7 @@ public class ToneListRecyclerAdapter extends RecyclerView.Adapter<ToneListRecycl
     public int getItemCount() {
         return listdata.size();
     }
+
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public ListItemBinding binding;
