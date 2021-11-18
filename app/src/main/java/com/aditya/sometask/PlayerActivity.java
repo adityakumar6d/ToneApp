@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import com.aditya.sometask.databinding.ActivityPlayerBinding;
-import com.aditya.sometask.viewmodels.PlayerViewModel;
 import com.bumptech.glide.Glide;
 
 public class PlayerActivity extends AppCompatActivity {

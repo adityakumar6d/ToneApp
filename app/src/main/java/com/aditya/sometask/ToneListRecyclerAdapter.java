@@ -28,8 +28,7 @@ public class ToneListRecyclerAdapter extends RecyclerView.Adapter<ToneListRecycl
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View listItem = layoutInflater.inflate(R.layout.list_item, parent, false);
-        ViewHolder viewHolder = new ViewHolder(listItem);
-        return viewHolder;
+        return new ViewHolder(listItem);
     }
 
     @SuppressLint("NotifyDataSetChanged")
