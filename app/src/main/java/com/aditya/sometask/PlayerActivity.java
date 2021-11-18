@@ -1,6 +1,7 @@
 package com.aditya.sometask;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -28,7 +29,7 @@ public class PlayerActivity extends AppCompatActivity {
 
         Glide.with(binding.imageView6).load(url).into(binding.imageView6);
         binding.toneTitle.setText(title);
-        binding.appbarlayoutToolBar.setNavigationOnClickListener(v -> finish());
+        clickEvents();
 
         if (isLiked) {
             // api call for like/dislike icon
@@ -50,5 +51,13 @@ public class PlayerActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void clickEvents() {
+        binding.appbarlayoutToolBar.setNavigationOnClickListener(v -> finish());
+        binding.imageView7.setOnClickListener(v -> Toast.makeText(this, "Play button", Toast.LENGTH_SHORT).show());
+        binding.imageView8.setOnClickListener(v -> Toast.makeText(this, "Play Previous Track", Toast.LENGTH_SHORT).show());
+        binding.imageView9.setOnClickListener(v -> Toast.makeText(this, "Play Next Track", Toast.LENGTH_SHORT).show());
+        binding.imageView4.setOnClickListener(v -> Toast.makeText(this, "Menu Button", Toast.LENGTH_SHORT).show());
     }
 }
